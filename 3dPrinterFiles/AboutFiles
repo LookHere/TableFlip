@@ -1,1 +1,5 @@
-The files were developed in blender
+The files were developed in blender.
+
+Most of these files are for the descrewer, a design we created to unscrew projects.  We've shifted direction of our project, but we're leaving the files up in case they'd be useful to anyone (even just to see our build process).
+
+After thinking about that project and getting some community feedback, we shifted to the desolderer, a prototype to desolder electronics.  This is going to be built on top of a home 3d printer, so it'll require far less components.  
