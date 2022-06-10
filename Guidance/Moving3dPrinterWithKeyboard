@@ -1,0 +1,48 @@
+import serial, time, pygame, sys 
+
+ser = serial.Serial('/dev/tty.usbserial-1130', 115200)  # open serial port
+pygame.init()
+display = pygame.display.set_mode((300, 300))
+
+W_KEY = 119
+S_KEY = 115
+A_KEY = 97
+D_KEY = 100
+Q_KEY = 113
+E_KEY = 101
+I_KEY = 105
+K_KEY = 107
+
+X = 0
+Y = 0
+Z = 0
+
+INC = 1
+
+# autohome 
+ser.write('G28'.encode())
+
+while True:
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+         
+        if event.type == pygame.KEYDOWN:
+
+            if event.key == I_KEY: INC = INC + 1 
+            if event.key == K_KEY: INC = INC - 1
+            else:
+                if event.key == W_KEY: X = X + INC
+                elif event.key == S_KEY: X = X - INC
+                elif event.key == A_KEY: Y = Y + INC
+                elif event.key == D_KEY: Y = Y - INC
+                elif event.key == Q_KEY: Z = Z + INC
+                elif event.key == E_KEY: Z = Z - INC
+
+                #move printer head 
+                ser.write('G0 X{} Y{} Z{} \n'.format(X, Y, Z).encode())
+            
+
+            print("X:{}, Y:{}, Z:{}, Step:{}".format(X, Y, Z, INC))
